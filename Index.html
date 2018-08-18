@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>Welcome to My Homepage</title>
@@ -11,9 +12,9 @@
                  <h1>HomePage</h1>
                  </a>
         <form class="form-inline"> 
-        <input id="Uname" type="text" placeholder="Username" name="Uname" required>
-        <input id="Passw" type="password" placeholder="Password" name="Passw" required>
-        <button type = "submit">Login</button>
+        <input id="Uname" type="text" placeholder="Username" name="Uname">
+        <input id="Passw" type="password" placeholder="Password" name="Passw">
+        <button type="button" id="login">Login</button>
         </div>   
          </form>
           <div class ="row">     
@@ -39,12 +40,11 @@
           </div>
           </div>
           <script>
-                var submit = document.getElementById("submit");
-                var Uname = document.getElementById('Uname');
-                var Passw = document.getElementById('Passw');
-
-                console.log(Uname);
-                console.log(Passw); 
+            var btnsubmit = document.getElementById('login');
+              btnsubmit.addEventListener('click', function(e){
+              console.log(document.getElementById('Uname').value);
+              console.log(document.getElementById('Passw').value);
+            });
           </script>
 </body>
 </head>
