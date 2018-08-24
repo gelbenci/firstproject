@@ -12,39 +12,114 @@
                  <h1>HomePage</h1>
                  </a>
         <form class="form-inline"> 
-        <input id="Uname" type="text" placeholder="Username" name="Uname">
-        <input id="Passw" type="password" placeholder="Password" name="Passw">
-        <button type="button" id="login">Login</button>
+        <input id="Email" type="text" placeholder="Email" name="Email" required>
+        <input id="Passw" type="password" placeholder="Password" name="Passw" required>
+        <button type = "submit" id= "Login">Login</button>
         </div>   
          </form>
           <div class ="row">     
-            <form class="regform">
+            <form class="regform" name="vform" method="POST"  onsubmit='return formValidation()' ><br><p id="head"></p><br>
                     <div class="regcontainer">
                     <h1>Sign Up Here</h1>
                     <hr>
-                
-                    <label for="email"><b>Email</b></label>
-                    <input type="text" placeholder="Enter Email" name="email" required>
-                
-                    <label for="psw"><b>Password</b></label>
-                    <input type="assword" placeholder="Enter Password" name="psw" required>
+                    <label for="FullName"><b>Full Name:</b></label>
+                    <input type="text" name="Fname" id = "fname">
+                    <div id="fname_error" class="val_error"></div><br>
                     
-                    <label for="psw-repeat"><b>Repeat Password</b></label>
-                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                    <hr>
+                    <label for="UserName"><b>Username:</b></label>
+                    <input type="text" name="Uname" id="uname">
+                    <div id="uname_error" class="val_error"></div><br>
+                    
+                    <label for="Email"><b>Email:</b></label>
+                    <input type="email" placeholder = "Enter Email" name="email" id="email"><br>
+                    <div id="emailerror" class="val_error"></div>
+                    <br>
+                    <label for="pswd"><b>Password:</b></label>
+                    <input type="password" placeholder="Enter Password" name="pswd" id="pswd"><br>
+                    <br>
+                    <label for="confirmpswd"><b>Confirm Password:</b></label>
+                    <input type="password"  name="confirmpswd" id="confirmpswd"><br>
+                    <div id="pswd_error" class="val_error"></div>
+
                     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
                 
-                    <button type="submit" class="registerbtn">Register</button>
+                    <button type="submit" class="registerbtn" id="submit" value='Check Form'>Register</button>
                     </div>
             </form>
           </div>
           </div>
-          <script>
-            var btnsubmit = document.getElementById('login');
+          <script>     
+          var btnsubmit = document.getElementById('Login');
               btnsubmit.addEventListener('click', function(e){
-              console.log(document.getElementById('Uname').value);
+              console.log(document.getElementById('Email').value);
               console.log(document.getElementById('Passw').value);
-            });
+            });  
+
+            var fname = document.forms["vform"]["fname"];
+            var uname = document.forms["vform"]["uname"];
+            var email = document.forms["vform"]["email"];
+            var pswd = document.forms["vform"]["paswword"];
+            var confirmpswd = document.forms["vform"]["confirmpswd"];
+
+            var fname_error = document.getElementById("fname_error");
+            var uname_error = document.getElementById("uname_error");
+            var email_error = document.getElementById("email_error");
+            var pswd_error = document.getElementById("pswd_error");
+
+            fname.addEventListener("blur", nameVerify, true);
+            uname.addEventListener("blur", nameVerify, true);
+            email.addEventListener("blur", emailVerify, true);
+            confirmpswd.addEventListener("blur", passwordVerify, true);
+
+            function formValidation() {
+              if (fname.value == "") {
+                fname.style.border = "1px solid red";
+                fname_error.textContent = "Full Name is required";
+                fname.focus();
+                return false;
+              }
+              if (uname.value == "") {
+                uname.style.border = "1px solid red";
+                uname_error.textContent = "Username is required";
+                uname.focus();
+                return false;
+            }
+              if (confirmpswd.value == "") {
+                confirmpswd.style.border = "1px solid red";
+                pswd_error.textContent = "Password is required";
+                confirmpswd.focus();
+                return false;
+            }
+
+            function nameVerify(){
+
+               if(fname.value !="") {
+                fname.style.border = "1px solid red";
+                fname_error.innerHTML = "";
+                return true;
+              }
+            }
+              if(uname.value !="") {
+                uname.style.border = "1px solid red";
+                uname_error.innerHTML = "";
+                return true;
+              }
+            }
+             function emailVerify(){
+              if(email.value !="") {
+                email.style.border = "1px solid red";
+                email_error.innerHTML = "";
+                return true;
+              }
+            }
+            function pswdVerify(){
+              if(confirmpswd.value !="") {
+                confirmpswd.style.border = "1px solid red";
+                pswd_error.innerHTML = "";
+                return true;
+              }
+            }
+
           </script>
 </body>
 </head>
