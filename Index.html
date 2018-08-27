@@ -71,13 +71,13 @@
             //SETTING ALL EVENT LISTENERS
             uname.addEventListener('blur', nameVerify, true);
             email.addEventListener('blur', emailVerify, true);
-            confirmpswd.addEventListener('blur', passwordVerify, true);
+            pswd.addEventListener('blur', passwordVerify, true);
 
             //VALIDATE FUNCTION
             function formValidation() {
               //validate full name
               if (fname.value == "") {
-                fname.border = "1px solid red";
+                fname.style.border = "1px solid red";
                 document.getElementById('fname');
                 fname_error.textContent = "Full Name is required";
                 fname.focus();
@@ -86,7 +86,7 @@
 
               //validate username
               if (uname.value == "") {
-                style.border = "1px solid red";
+                uname.style.border = "1px solid red";
                 document.getElementById('uname');
                 uname_error.textContent = "Username is required";
                 uname.focus();
@@ -111,7 +111,6 @@
                 return false;
               } 
               // check if two passwords match
-
               if (pswd.value != confirmpswd.value) {
                 pswd.style.border = "1px solid red";
                 document.getElementById('confirmpswd').style.color = "red";
@@ -146,15 +145,15 @@
                 return true;
               }
             }
-            function passwordVerify(){
-              if(pswd.value !="") {
+            function passwordVerify() {
+              if(pswd.value != "") {
                 pswd.style.border = "1px solid red";
                 document.getElementById('confirmpswd').style.color = "red";
                 document.getElementById('pswd').style.color = "red";
                 pswd_error.innerHTML = "";
                 return true;
               }
-            if (pswd.value === confirmpswd.value){
+            if (pswd.value === confirmpswd.value) {
                 password.style.border = "1px solid #5e6e66";
   	            document.getElementById('confirmpswd').style.color = "#5e6e66";
   	            pswd_error.innerHTML = "";
