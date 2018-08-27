@@ -8,9 +8,7 @@
 </head> 
 <body>
         <div class ="Header">
-          <a href="#default" id="logo">
-                 <h1>HomePage</h1>
-                 </a>
+          <li id = "logo"><a href="#default">Homepage</a></li>           
         <form class="form-inline"> 
         <input id="Email" type="text" placeholder="Email" name="Email" required>
         <input id="Passw" type="password" placeholder="Password" name="Passw" required>
@@ -22,21 +20,23 @@
                     <div class="regcontainer">
                     <h1>Sign Up Here</h1>
                     <hr>
+
                     <label for="FullName"><b>Full Name:</b></label>
                     <input type="text" name="Fname" id = "fname">
                     <div id="fname_error" class="val_error"></div><br>
-                    
+                  
+
                     <label for="UserName"><b>Username:</b></label>
                     <input type="text" name="Uname" id="uname">
                     <div id="uname_error" class="val_error"></div><br>
                     
                     <label for="Email"><b>Email:</b></label>
                     <input type="email" placeholder = "Enter Email" name="email" id="email"><br>
-                    <div id="emailerror" class="val_error"></div>
-                    <br>
+                    <div id="email_error" class="val_error"></div><br>
+
                     <label for="pswd"><b>Password:</b></label>
-                    <input type="password" placeholder="Enter Password" name="pswd" id="pswd"><br>
-                    <br>
+                    <input type="password" placeholder="Enter Password" name="pswd" id="pswd"><br><br>
+
                     <label for="confirmpswd"><b>Confirm Password:</b></label>
                     <input type="password"  name="confirmpswd" id="confirmpswd"><br>
                     <div id="pswd_error" class="val_error"></div>
@@ -55,71 +55,112 @@
               console.log(document.getElementById('Passw').value);
             });  
 
-            var fname = document.forms["vform"]["fname"];
-            var uname = document.forms["vform"]["uname"];
-            var email = document.forms["vform"]["email"];
-            var pswd = document.forms["vform"]["paswword"];
-            var confirmpswd = document.forms["vform"]["confirmpswd"];
+            //SELECTING ALL TEXT ELEMENTS
+            var fname = document.forms['vform']['fname'];
+            var uname = document.forms['vform']['uname'];
+            var email = document.forms['vform']['email'];
+            var pswd = document.forms['vform']['paswword'];
+            var confirmpswd = document.forms['vform']['confirmpswd'];
+            
+            // SELECTING ALL ERROR DISPLAY ELEMENTS
+            var fname_error = document.getElementById('fname_error');
+            var uname_error = document.getElementById('uname_error');
+            var email_error = document.getElementById('email_error');
+            var pswd_error = document.getElementById('pswd_error');
 
-            var fname_error = document.getElementById("fname_error");
-            var uname_error = document.getElementById("uname_error");
-            var email_error = document.getElementById("email_error");
-            var pswd_error = document.getElementById("pswd_error");
+            //SETTING ALL EVENT LISTENERS
+            uname.addEventListener('blur', nameVerify, true);
+            email.addEventListener('blur', emailVerify, true);
+            confirmpswd.addEventListener('blur', passwordVerify, true);
 
-            fname.addEventListener("blur", nameVerify, true);
-            uname.addEventListener("blur", nameVerify, true);
-            email.addEventListener("blur", emailVerify, true);
-            confirmpswd.addEventListener("blur", passwordVerify, true);
-
+            //VALIDATE FUNCTION
             function formValidation() {
+              //validate full name
               if (fname.value == "") {
-                fname.style.border = "1px solid red";
+                fname.border = "1px solid red";
+                document.getElementById('fname');
                 fname_error.textContent = "Full Name is required";
                 fname.focus();
                 return false;
               }
+
+              //validate username
               if (uname.value == "") {
-                uname.style.border = "1px solid red";
+                style.border = "1px solid red";
+                document.getElementById('uname');
                 uname_error.textContent = "Username is required";
                 uname.focus();
                 return false;
             }
-              if (confirmpswd.value == "") {
-                confirmpswd.style.border = "1px solid red";
-                pswd_error.textContent = "Password is required";
-                confirmpswd.focus();
+              // validate email
+              if (email.value == "") {
+                email.style.border = "1px solid red";
+                document.getElementById('email').style.color = "red";
+                email.textContent = "Email is required";
+                email.focus();
                 return false;
             }
+                //validate password
+
+              if(pswd.value == ""){
+                pswd.style.border = "1px solid red";
+                document.getElementById('pswd').style.color = "red";
+                confirmpswd.style.border = "1px solid red";
+                pswd_error.textContent = "Password is required";
+                pswd.focus();
+                return false;
+              } 
+              // check if two passwords match
+
+              if (pswd.value != confirmpswd.value) {
+                pswd.style.border = "1px solid red";
+                document.getElementById('confirmpswd').style.color = "red";
+                confirmpswd.style.border = "1px solid red";
+                pswd_error.innerHTML = "the two passwords do not match";
+                return false;
+            }
+          }
+          //Event handler functions
 
             function nameVerify(){
-
-               if(fname.value !="") {
+              if(fname.value !="") {
                 fname.style.border = "1px solid red";
+                console.log(document.getElementById('fname').value);
                 fname_error.innerHTML = "";
                 return true;
               }
-            }
+
               if(uname.value !="") {
                 uname.style.border = "1px solid red";
+                console.log(document.getElementById('uname').value);
                 uname_error.innerHTML = "";
                 return true;
               }
             }
+
              function emailVerify(){
               if(email.value !="") {
                 email.style.border = "1px solid red";
+                console.log(document.getElementById('email').value);
                 email_error.innerHTML = "";
                 return true;
               }
             }
-            function pswdVerify(){
-              if(confirmpswd.value !="") {
-                confirmpswd.style.border = "1px solid red";
+            function passwordVerify(){
+              if(pswd.value !="") {
+                pswd.style.border = "1px solid red";
+                document.getElementById('confirmpswd').style.color = "red";
+                document.getElementById('pswd').style.color = "red";
                 pswd_error.innerHTML = "";
                 return true;
               }
+            if (pswd.value === confirmpswd.value){
+                password.style.border = "1px solid #5e6e66";
+  	            document.getElementById('confirmpswd').style.color = "#5e6e66";
+  	            pswd_error.innerHTML = "";
+  	            return true;
             }
-
+          }
           </script>
 </body>
 </head>
